@@ -1,3 +1,8 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 #header {
     border: 1px black solid;
     display: flex;
@@ -17,4 +22,32 @@ img {
 
 select {
     border: none;
+}
+
+#main {
+    border: 1px red solid;
+    height: 500px;
+}
+
+#footer {
+    border: 1px green solid;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-list li{
+    list-style-type: none;
+}
+
+.footer_area {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+a:active,
+a:hover,
+a {
+    text-decoration: none;
+    color: black;
 }

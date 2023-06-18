@@ -12,9 +12,9 @@ const select = document.createElement('select');
 select.setAttribute('id', 'location-dropdown')
 
 const locations = [
-    { value: 'location1', label: 'Poland' },
-    { value: 'location2', label: 'Belarus' },
-    { value: 'location3', label: 'Germany' },
+    { value: 'Poland', label: 'Poland' },
+    { value: 'Belarus', label: 'Belarus' },
+    { value: 'Germany', label: 'Germany' },
 ];
 locations.forEach(location => {
     const option = document.createElement('option');
