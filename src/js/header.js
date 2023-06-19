@@ -28,7 +28,7 @@ searchArea.classList.add('search_area');
 const searchInputSvg = document.createElement('img');
 searchInputSvg.setAttribute('src', './style/assets/img/search.svg');
 searchInputSvg.classList.add('search_svg');
-const searchInput = document.createElement('input');
+export const searchInput = document.createElement('input');
 searchInput.setAttribute('id', 'search');
 searchInput.setAttribute('placeholder', 'Search your product...');
 searchInput.classList.add('search_input');

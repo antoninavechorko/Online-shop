@@ -1,3 +1,5 @@
+import {searchInput} from './header.js'
+
 const mainWrapper = document.getElementById('main');
 
 const cardsURL = 'https://648ecbd875a96b66444447c2.mockapi.io/cards';
@@ -17,7 +19,7 @@ const getCards = () => {
     });
 };
 
-const createCards = ({name, price, image, discount, id, description}) => {
+const createCards = ({name, price, image, discount, id}) => {
 
     const cardItem = document.createElement('div');
     cardItem.classList.add('cards-item');
@@ -55,12 +57,9 @@ const createCards = ({name, price, image, discount, id, description}) => {
     const cardProductName = document.createElement('h4');
     cardProductName.innerText = name;
 
-    const cardProductDescription = document.createElement('p');
-    cardProductDescription.innerText = description;
-
     addToBasketBtn.append(basketSvg, basketSpan);
     cardImageArea.append(cardImage, discountSpan, quickViewBtn, addToBasketBtn);
-    cardDetailsArea.append(priceDiscounted, priceNormal, cardProductName, cardProductDescription)
+    cardDetailsArea.append(priceDiscounted, priceNormal, cardProductName)
     cardItem.append(cardImageArea, cardDetailsArea);
     cardsBlock.append(cardItem);
 
@@ -69,10 +68,39 @@ const createCards = ({name, price, image, discount, id, description}) => {
     // })
 }
 
+const renderCards = (cardsData) => {
+    cardsData.forEach(card => {
+        createCards(card);
+    });
+};
+
+getCards().then(cards => {
+    renderCards(cards);
+});
+
 const calculateDiscountedPrice = (price, discount) => {
     let discountedPrice = (price - (price * (discount / 100))).toFixed(2);
     return Number(discountedPrice);
 }
 
-getCards().then(cards => cards.forEach(card => createCards(card)));
 
+
+const handleSearch = (event) => {
+    const searchQuery = event.target.value.toLowerCase();
+    const cards = Array.from(cardsBlock.querySelectorAll('.cards-item'));
+    cards.forEach(card => {
+        const name = card.querySelector('h4').innerText.toLowerCase();
+        if (name.includes(searchQuery)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    if (searchQuery === '') {
+        searchInput.value = '';
+    }
+
+};
+
+searchInput.addEventListener('input', handleSearch);
