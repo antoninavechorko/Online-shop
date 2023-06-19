@@ -7,12 +7,39 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MyShop</title>
     <link rel="stylesheet" href="/node_modules/normalize.css/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
     <header id="header"></header>
-    <div id="main" class="main"></div>
+    <div id="main" class="main">
+
+<!--        &lt;!&ndash; block cards &ndash;&gt;-->
+<!--        <div id="cards" class="cards">-->
+<!--            &lt;!&ndash; this block will be hiden and will show up for product search &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; end block cards &ndash;&gt;-->
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="style/assets/img/banner1.png"></div>
+                <div class="swiper-slide"><img src="style/assets/img/banner2.jpg.avif"></div>
+                <div class="swiper-slide"><img src="style/assets/img/banner3.png.avif"></div>
+                <div class="swiper-slide"><img src="style/assets/img/banner4.png.avif"></div>
+                <div class="swiper-slide"><img src="style/assets/img/banner1.png"></div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <h2 class="title">Хиты продаж</h2>
+        <div class="cards" id="cards">
+        </div>
+
+
+    </div>
     <footer id="footer"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="js/slider.js"></script>
     <script type="module" src="js/index.js"></script>
 </body>
 </html>

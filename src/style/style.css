@@ -26,7 +26,6 @@ select {
 
 #main {
     border: 1px red solid;
-    height: 500px;
 }
 
 #footer {
@@ -50,4 +49,128 @@ a:hover,
 a {
     text-decoration: none;
     color: black;
+}
+
+body {
+    position: relative;
+}
+
+.swiper {
+    width: 100%;
+    height: 100px;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/*//card*/
+.cards-item {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.cardImageArea {
+    position: relative;
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.discount-span {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ff0000;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.quick-view-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #333;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.add-to-basket-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.basket-svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.count-items {
+    font-size: 12px;
+}
+
+.cardDetailsArea {
+    margin-top: 10px;
+}
+
+.price-discounted {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.price-normal {
+    font-size: 14px;
+    color: #888;
+    text-decoration: line-through;
+}
+
+.card-product-name {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-product-description {
+    margin-top: 5px;
+    font-size: 14px;
 }
