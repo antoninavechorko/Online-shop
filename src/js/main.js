@@ -1,5 +1,5 @@
-import {searchInput} from './header.js'
-import {basketArea} from './header.js'
+import { searchInput } from './header.js';
+import { basketArea } from './header.js';
 
 const mainWrapper = document.getElementById('main');
 
@@ -11,17 +11,19 @@ mainWrapper.append(cardsBlock);
 const getCards = () => {
     return new Promise((resolve, reject) => {
         fetch(cardsURL)
-            .then(response => {
+            .then((response) => {
                 if (response.ok) {
                     resolve(response.json());
                 }
                 reject(new Error('Some Error'));
+            })
+            .catch((error) => {
+                reject(error);
             });
     });
 };
 
-const createCards = ({name, price, image, discount, id}) => {
-
+const createCards = ({ name, price, image, discount, id }) => {
     const cardItem = document.createElement('div');
     cardItem.classList.add('cards-item');
     cardItem.setAttribute('id', id);
@@ -60,13 +62,9 @@ const createCards = ({name, price, image, discount, id}) => {
 
     addToBasketBtn.append(basketSvg, basketSpan);
     cardImageArea.append(cardImage, discountSpan, quickViewBtn, addToBasketBtn);
-    cardDetailsArea.append(priceDiscounted, priceNormal, cardProductName)
+    cardDetailsArea.append(priceDiscounted, priceNormal, cardProductName);
     cardItem.append(cardImageArea, cardDetailsArea);
     cardsBlock.append(cardItem);
-
-    // addToBasketBtn.addEventListener('click', () => {
-    //     setLocalStorage(id);
-    // })
 
     quickViewBtn.addEventListener('click', () => {
         showQuickView({ name, price, image, discount });
@@ -76,27 +74,31 @@ const createCards = ({name, price, image, discount, id}) => {
         addToBasket({ name, price, image, discount, id });
         showNotification('Item added to the basket');
     });
-}
+};
 
 const renderCards = (cardsData) => {
-    cardsData.forEach(card => {
+    cardsData.forEach((card) => {
         createCards(card);
     });
 };
 
-getCards().then(cards => {
-    renderCards(cards);
-});
+getCards()
+    .then((cards) => {
+        renderCards(cards);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
 
 const calculateDiscountedPrice = (price, discount) => {
     let discountedPrice = (price - (price * (discount / 100))).toFixed(2);
     return Number(discountedPrice);
-}
+};
 
 const handleSearch = (event) => {
     const searchQuery = event.target.value.toLowerCase();
     const cards = Array.from(cardsBlock.querySelectorAll('.cards-item'));
-    cards.forEach(card => {
+    cards.forEach((card) => {
         const name = card.querySelector('h4').innerText.toLowerCase();
         if (name.includes(searchQuery)) {
             card.style.display = 'block';
@@ -108,13 +110,11 @@ const handleSearch = (event) => {
     if (searchQuery === '') {
         searchInput.value = '';
     }
-
 };
 
 searchInput.addEventListener('input', handleSearch);
 
 const showQuickView = ({ name, price, image, discount }) => {
-    // Create DOM elements for the modal window
     const modalWrapper = document.createElement('div');
     modalWrapper.classList.add('modal-wrapper');
 
@@ -136,7 +136,7 @@ const showQuickView = ({ name, price, image, discount }) => {
     cardName.innerText = name;
 
     const cardDiscounted = document.createElement('span');
-    cardDiscounted.innerText = `Price with discount:` + calculateDiscountedPrice(price, discount) + `€` ;
+    cardDiscounted.innerText = `Price with discount: ${calculateDiscountedPrice(price, discount)}€`;
 
     const cardPrice = document.createElement('span');
     cardPrice.innerText = `Price: ${price} €`;
@@ -148,28 +148,22 @@ const showQuickView = ({ name, price, image, discount }) => {
     modalContent.append(closeBtn, cardImage, cardDetails);
     modalWrapper.appendChild(modalContent);
 
-    // Append the modal to the document body
     document.body.appendChild(modalWrapper);
 
-    // Close the modal when clicking the close button
     closeBtn.addEventListener('click', () => {
         modalWrapper.remove();
     });
 };
 
+const basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
 const addToBasket = ({ name, price, image, discount, id }) => {
-    const basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
     const newItem = { name, price, image, discount, id };
     basketItems.push(newItem);
     localStorage.setItem('basketItems', JSON.stringify(basketItems));
     updateBasketCount();
-
-    showNotification('Item added to the basket')
-
 };
 
 const updateBasketCount = () => {
-    const basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
     const countItems = document.getElementById('count-items');
     countItems.innerText = basketItems.length;
 };
@@ -180,92 +174,102 @@ const showNotification = (message) => {
     notification.innerText = message;
     document.body.append(notification);
 
-    // Удалить уведомление через некоторое время
     setTimeout(() => {
         notification.remove();
-    }, 2000); // Удалить уведомление через 3 секунды (3000 миллисекунд)
+    }, 2000);
 };
 
-
-const deleteBasketItem = (itemId) => {
-    let basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
-    basketItems = basketItems.filter(item => item.id !== itemId);
-    localStorage.setItem('basketItems', JSON.stringify(basketItems));
-    updateBasketCount();
-
-    if (basketItems.length === 0) {
-        const modalWrapper2 = document.querySelector('.modal-wrapper');
-        if (modalWrapper2) {
-            modalWrapper2.remove();
-        }
-    } else {
-        showBasketModal(); // Обновляем модальное окно корзины после удаления позиции
-    }
-};
 const showBasketModal = () => {
-    const basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
-
     const modalWrapper2 = document.createElement('div');
     modalWrapper2.classList.add('modal-wrapper');
 
     const modalContent = document.createElement('div');
     modalContent.classList.add('modal-content');
 
+    const basketTitle = document.createElement('h2');
+    basketTitle.innerText = 'Корзина';
+
     const closeBtn = document.createElement('span');
     closeBtn.classList.add('close-btn');
     closeBtn.innerHTML = '&times;';
+    closeBtn.addEventListener('click', () => {
+        modalWrapper2.remove();
+    });
 
-    const basketItemsList = document.createElement('ul');
-    basketItemsList.classList.add('basket-items-list');
+    const clearBasketBtn = document.createElement('button');
+    clearBasketBtn.innerText = 'Очистить корзину';
+    clearBasketBtn.addEventListener('click', () => {
+        localStorage.removeItem('basketItems');
+        modalWrapper2.remove();
+        updateBasketCount();
+    });
+
+    const itemsList = document.createElement('ul');
+    itemsList.classList.add('basket-items-list');
 
     let totalCost = 0;
 
     const proceedToPaymentBtn = document.createElement('button');
-    proceedToPaymentBtn.innerText = 'Pay';
+    proceedToPaymentBtn.innerText = 'Оплатить';
 
+    if (basketItems.length === 0) {
+        const emptyBasketText = document.createElement('p');
+        emptyBasketText.innerText = 'Ваша корзина пуста';
+        proceedToPaymentBtn.style.display = 'none';
 
+        modalContent.append(basketTitle, closeBtn, clearBasketBtn, emptyBasketText);
+    } else {
+        basketItems.forEach((item) => {
+            const listItem = document.createElement('li');
+            listItem.classList.add('basket-item');
 
-    basketItems.forEach(item => {
-        const listItem = document.createElement('li');
-        const itemName = document.createElement('span');
-        itemName.innerText = item.name;
+            const itemName = document.createElement('span');
+            itemName.innerText = item.name;
 
-        const itemPrice = document.createElement('span');
-        itemPrice.innerText = `€${item.price}`;
+            const itemPrice = document.createElement('span');
+            itemPrice.innerText = `${item.price} €`;
 
-        const deleteButton = document.createElement('button');
-        deleteButton.innerText = 'Delete';
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = 'Удалить';
+            deleteButton.addEventListener('click', () => {
+                deleteItem(item.id);
+            });
 
-        listItem.append(itemName, itemPrice, deleteButton);
-        basketItemsList.appendChild(listItem);
+            listItem.append(itemName, itemPrice, deleteButton);
+            itemsList.appendChild(listItem);
 
-        totalCost += parseFloat(item.price);
-
-        deleteButton.addEventListener('click', () => {
-            // Обработчик события для удаления позиции
-            deleteBasketItem(item.id);
+            totalCost += parseFloat(item.price);
         });
 
-        closeBtn.addEventListener('click', () => {
-            // Обработчик события для удаления позиции
-            modalWrapper2.remove();
-        });
+        const totalPrice = document.createElement('div');
+        totalPrice.classList.add('total-price');
+        totalPrice.innerText = `Итого: ${totalCost.toFixed(2)} €`;
 
-    });
+        modalContent.append(basketTitle, closeBtn, clearBasketBtn, itemsList, totalPrice, proceedToPaymentBtn);
+    }
 
-
-
-    const totalPrice = document.createElement('div');
-    totalPrice.classList.add('total-price');
-    totalPrice.innerText = `Total: €${totalCost.toFixed(2)}`;
-
-    modalContent.append(closeBtn, basketItemsList, totalPrice, proceedToPaymentBtn);
     modalWrapper2.appendChild(modalContent);
     document.body.appendChild(modalWrapper2);
 
-    closeBtn.addEventListener('click', () => {
-        modalWrapper2.remove();
+    clearBasketBtn.addEventListener('click', () => {
+        localStorage.removeItem('basketItems');
+        updateBasketCount();
     });
+
+    proceedToPaymentBtn.addEventListener('click', () => {
+        console.log('Переход к странице оплаты');
+    });
+};
+
+const deleteItem = (itemId) => {
+    if (basketItems.length === 0) {
+        const modalWrapper2 = document.querySelector('.modal-wrapper');
+        if (modalWrapper2) {
+            modalWrapper2.remove();
+        }
+    } else {
+        showBasketModal();
+    }
 };
 
 basketArea.addEventListener('click', () => {
@@ -275,6 +279,3 @@ basketArea.addEventListener('click', () => {
 window.addEventListener('load', () => {
     updateBasketCount();
 });
-
-
-
