@@ -233,12 +233,29 @@ const showBasketModal = () => {
 
             const deleteButton = document.createElement('button');
             deleteButton.innerText = 'Удалить';
+
             deleteButton.addEventListener('click', () => {
-                deleteItem(item.id);
+                const itemIndex = basketItems.findIndex((item) => item.id === item.id);
+                if (itemIndex > -1) {
+                    basketItems.splice(itemIndex, 1);
+                    localStorage.setItem('basketItems', JSON.stringify(basketItems));
+                    listItem.remove();
+                    updateBasketCount();
+
+                    if (basketItems.length === 0) {
+                        modalContent.innerHTML = '';
+                        const emptyBasketText = document.createElement('p');
+                        emptyBasketText.innerText = 'Ваша корзина пуста';
+                        proceedToPaymentBtn.style.display = 'none';
+                        clearBasketBtn.style.display = 'none';
+
+                        modalContent.append(basketTitle, closeBtn, emptyBasketText);
+                    }
+                }
             });
 
             listItem.append(itemName, itemPrice, deleteButton);
-            itemsList.appendChild(listItem);
+            itemsList.append(listItem);
 
             totalCost += parseFloat(item.price);
         });
@@ -263,17 +280,6 @@ const showBasketModal = () => {
     proceedToPaymentBtn.addEventListener('click', () => {
         console.log('Переход к странице оплаты');
     });
-};
-
-const deleteItem = (itemId) => {
-    if (basketItems.length === 0) {
-        const modalWrapper2 = document.querySelector('.modal-wrapper');
-        if (modalWrapper2) {
-            modalWrapper2.remove();
-        }
-    } else {
-        showBasketModal();
-    }
 };
 
 basketArea.addEventListener('click', () => {
