@@ -110,6 +110,9 @@ const calculateDiscountedPrice = (price, discount) => {
 const handleSearch = (event) => {
     const searchQuery = event.target.value.toLowerCase();
     const cards = Array.from(cardsBlock.querySelectorAll('.cards-item'));
+
+    let slider = document.getElementsByClassName('swiper')[0];
+
     cards.forEach((card) => {
         const name = card.querySelector('h4').innerText.toLowerCase();
         if (name.includes(searchQuery)) {
@@ -121,6 +124,9 @@ const handleSearch = (event) => {
 
     if (searchQuery === '') {
         searchInput.value = '';
+        slider.style.display = 'block';
+    } else {
+        slider.style.display = 'none';
     }
 };
 
