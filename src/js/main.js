@@ -229,8 +229,14 @@ const addToBasket = ({ name, price, image, discount, id }) => {
 const updateBasketCount = () => {
     const countItems = document.getElementById('count-items');
     const length = basketItems.length;
-
     countItems.innerText = `${length}`;
+
+    if (length === 0) {
+        countItems.style.display = 'none';
+    } else {
+        countItems.style.display = 'inline-block';
+    }
+
 };
 
 const showNotification = (message) => {
@@ -252,7 +258,7 @@ const showBasketModal = () => {
     modalContent.classList.add('modal-content');
 
     const basketTitle = document.createElement('h2');
-    basketTitle.innerText = 'Корзина';
+    basketTitle.innerText = 'Cart';
 
     const closeBtn = document.createElement('span');
     closeBtn.classList.add('close-btn');
@@ -262,7 +268,7 @@ const showBasketModal = () => {
     });
 
     const clearBasketBtn = document.createElement('button');
-    clearBasketBtn.innerText = 'Очистить корзину';
+    clearBasketBtn.innerText = 'Clear Cart';
 
     clearBasketBtn.addEventListener('click', () => {
         localStorage.removeItem('basketItems');
@@ -276,11 +282,11 @@ const showBasketModal = () => {
     let totalCost = 0;
 
     const proceedToPaymentBtn = document.createElement('button');
-    proceedToPaymentBtn.innerText = 'Оплатить';
+    proceedToPaymentBtn.innerText = 'Proceed to payment';
 
     if (basketItems.length === 0) {
         const emptyBasketText = document.createElement('p');
-        emptyBasketText.innerText = 'Ваша корзина пуста';
+        emptyBasketText.innerText = 'Your cart is empty';
         proceedToPaymentBtn.style.display = 'none';
         clearBasketBtn.style.display = 'none';
 
@@ -297,7 +303,7 @@ const showBasketModal = () => {
             itemPrice.innerText = `${item.price} €`;
 
             const deleteButton = document.createElement('button');
-            deleteButton.innerText = 'Удалить';
+            deleteButton.innerText = 'Delete';
 
             deleteButton.addEventListener('click', () => {
                 const itemIndex = basketItems.findIndex((item) => item.id === item.id);
@@ -308,12 +314,12 @@ const showBasketModal = () => {
                     // updateBasketCount();
 
                     totalCost -= parseFloat(item.price);
-                    totalPrice.innerText = `Итого: ${totalCost.toFixed(2)} €`;
+                    totalPrice.innerText = `Total Sum: ${totalCost.toFixed(2)} €`;
 
                     if (basketItems.length === 0) {
                         modalContent.innerHTML = '';
                         const emptyBasketText = document.createElement('p');
-                        emptyBasketText.innerText = 'Ваша корзина пуста';
+                        emptyBasketText.innerText = 'Your cart is empty';
                         proceedToPaymentBtn.style.display = 'none';
                         clearBasketBtn.style.display = 'none';
 
@@ -331,7 +337,7 @@ const showBasketModal = () => {
 
         const totalPrice = document.createElement('div');
         totalPrice.classList.add('total-price');
-        totalPrice.innerText = `Итого: ${totalCost.toFixed(2)} €`;
+        totalPrice.innerText = `Total Sum: ${totalCost.toFixed(2)} €`;
 
         modalContent.append(basketTitle, closeBtn, clearBasketBtn, itemsList, totalPrice, proceedToPaymentBtn);
     }
@@ -347,7 +353,7 @@ const showBasketModal = () => {
     });
 
     proceedToPaymentBtn.addEventListener('click', () => {
-        alert('Переход к странице оплаты');
+        alert('You will be forwarded to another window');
     });
 };
 

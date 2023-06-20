@@ -22,14 +22,16 @@ accountSvg.setAttribute('src', './style/assets/img/account.svg');
 
 export const basketArea = document.createElement('button');
 basketArea.classList.add('basket_area');
-basketArea.setAttribute('id','count-items');
+basketArea.setAttribute('id','basket-area');
+const basketSpan = document.createElement('span');
+basketSpan.setAttribute('id','count-items');
 const basketSvg = document.createElement('img');
 basketSvg.setAttribute('src', './style/assets/img/basket.svg');
 
 
 searchArea.append(searchInputSvg, searchInput);
 accountArea.append(accountSvg);
-basketArea.append(basketSvg);
+basketArea.append(basketSvg, basketSpan);
 header.append(headerImg, searchArea, accountArea, basketArea);
 
 
