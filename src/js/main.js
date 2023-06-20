@@ -198,6 +198,7 @@ const showBasketModal = () => {
 
     const clearBasketBtn = document.createElement('button');
     clearBasketBtn.innerText = 'Очистить корзину';
+
     clearBasketBtn.addEventListener('click', () => {
         localStorage.removeItem('basketItems');
         modalWrapper2.remove();
@@ -216,6 +217,7 @@ const showBasketModal = () => {
         const emptyBasketText = document.createElement('p');
         emptyBasketText.innerText = 'Ваша корзина пуста';
         proceedToPaymentBtn.style.display = 'none';
+        clearBasketBtn.style.display = 'none';
 
         modalContent.append(basketTitle, closeBtn, clearBasketBtn, emptyBasketText);
     } else {
@@ -252,8 +254,10 @@ const showBasketModal = () => {
     document.body.appendChild(modalWrapper2);
 
     clearBasketBtn.addEventListener('click', () => {
+        basketItems.length = 0;
         localStorage.removeItem('basketItems');
         updateBasketCount();
+        showBasketModal();
     });
 
     proceedToPaymentBtn.addEventListener('click', () => {
