@@ -1,4 +1,5 @@
 import {searchInput} from './header.js'
+import {basketArea} from './header.js'
 
 const mainWrapper = document.getElementById('main');
 
@@ -38,7 +39,7 @@ const createCards = ({name, price, image, discount, id}) => {
     const quickViewBtn = document.createElement('button');
     quickViewBtn.innerText = 'Quick View';
 
-    const addToBasketBtn = document.createElement('div');
+    const addToBasketBtn = document.createElement('button');
     const basketSvg = document.createElement('img');
     basketSvg.setAttribute('src', './style/assets/img/basket.svg');
     const basketSpan = document.createElement('span');
@@ -66,6 +67,12 @@ const createCards = ({name, price, image, discount, id}) => {
     // addToBasketBtn.addEventListener('click', () => {
     //     setLocalStorage(id);
     // })
+
+    quickViewBtn.addEventListener('click', () => {
+        showQuickView({ name, price, image, discount });
+    });
+
+
 }
 
 const renderCards = (cardsData) => {
@@ -82,8 +89,6 @@ const calculateDiscountedPrice = (price, discount) => {
     let discountedPrice = (price - (price * (discount / 100))).toFixed(2);
     return Number(discountedPrice);
 }
-
-
 
 const handleSearch = (event) => {
     const searchQuery = event.target.value.toLowerCase();
@@ -104,3 +109,49 @@ const handleSearch = (event) => {
 };
 
 searchInput.addEventListener('input', handleSearch);
+
+const showQuickView = ({ name, price, image, discount }) => {
+    // Create DOM elements for the modal window
+    const modalWrapper = document.createElement('div');
+    modalWrapper.classList.add('modal-wrapper');
+
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('modal-content');
+
+    const closeBtn = document.createElement('span');
+    closeBtn.classList.add('close-btn');
+    closeBtn.innerHTML = '&times;';
+
+    const cardImage = document.createElement('img');
+    cardImage.classList.add('card-image');
+    cardImage.setAttribute('src', image);
+
+    const cardDetails = document.createElement('div');
+    cardDetails.classList.add('card-details');
+
+    const cardName = document.createElement('h2');
+    cardName.innerText = name;
+
+    const cardDiscounted = document.createElement('span');
+    cardDiscounted.innerText = `Price with discount:` + calculateDiscountedPrice(price, discount) + `€` ;
+
+    const cardPrice = document.createElement('span');
+    cardPrice.innerText = `Price: ${price} €`;
+
+    const cardDiscount = document.createElement('span');
+    cardDiscount.innerText = `Discount: ${discount}%`;
+
+    cardDetails.append(cardName, cardPrice, cardDiscount, cardDiscounted);
+    modalContent.append(closeBtn, cardImage, cardDetails);
+    modalWrapper.appendChild(modalContent);
+
+    // Append the modal to the document body
+    document.body.appendChild(modalWrapper);
+
+    // Close the modal when clicking the close button
+    closeBtn.addEventListener('click', () => {
+        modalWrapper.remove();
+    });
+};
+
+
