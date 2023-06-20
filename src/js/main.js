@@ -72,7 +72,10 @@ const createCards = ({name, price, image, discount, id}) => {
         showQuickView({ name, price, image, discount });
     });
 
-
+    addToBasketBtn.addEventListener('click', () => {
+        addToBasket({ name, price, image, discount, id });
+        showNotification('Item added to the basket');
+    });
 }
 
 const renderCards = (cardsData) => {
@@ -153,5 +156,125 @@ const showQuickView = ({ name, price, image, discount }) => {
         modalWrapper.remove();
     });
 };
+
+const addToBasket = ({ name, price, image, discount, id }) => {
+    const basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
+    const newItem = { name, price, image, discount, id };
+    basketItems.push(newItem);
+    localStorage.setItem('basketItems', JSON.stringify(basketItems));
+    updateBasketCount();
+
+    showNotification('Item added to the basket')
+
+};
+
+const updateBasketCount = () => {
+    const basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
+    const countItems = document.getElementById('count-items');
+    countItems.innerText = basketItems.length;
+};
+
+const showNotification = (message) => {
+    const notification = document.createElement('div');
+    notification.classList.add('notification');
+    notification.innerText = message;
+    document.body.append(notification);
+
+    // Удалить уведомление через некоторое время
+    setTimeout(() => {
+        notification.remove();
+    }, 2000); // Удалить уведомление через 3 секунды (3000 миллисекунд)
+};
+
+
+const deleteBasketItem = (itemId) => {
+    let basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
+    basketItems = basketItems.filter(item => item.id !== itemId);
+    localStorage.setItem('basketItems', JSON.stringify(basketItems));
+    updateBasketCount();
+
+    if (basketItems.length === 0) {
+        const modalWrapper2 = document.querySelector('.modal-wrapper');
+        if (modalWrapper2) {
+            modalWrapper2.remove();
+        }
+    } else {
+        showBasketModal(); // Обновляем модальное окно корзины после удаления позиции
+    }
+};
+const showBasketModal = () => {
+    const basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
+
+    const modalWrapper2 = document.createElement('div');
+    modalWrapper2.classList.add('modal-wrapper');
+
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('modal-content');
+
+    const closeBtn = document.createElement('span');
+    closeBtn.classList.add('close-btn');
+    closeBtn.innerHTML = '&times;';
+
+    const basketItemsList = document.createElement('ul');
+    basketItemsList.classList.add('basket-items-list');
+
+    let totalCost = 0;
+
+    const proceedToPaymentBtn = document.createElement('button');
+    proceedToPaymentBtn.innerText = 'Pay';
+
+
+
+    basketItems.forEach(item => {
+        const listItem = document.createElement('li');
+        const itemName = document.createElement('span');
+        itemName.innerText = item.name;
+
+        const itemPrice = document.createElement('span');
+        itemPrice.innerText = `€${item.price}`;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.innerText = 'Delete';
+
+        listItem.append(itemName, itemPrice, deleteButton);
+        basketItemsList.appendChild(listItem);
+
+        totalCost += parseFloat(item.price);
+
+        deleteButton.addEventListener('click', () => {
+            // Обработчик события для удаления позиции
+            deleteBasketItem(item.id);
+        });
+
+        closeBtn.addEventListener('click', () => {
+            // Обработчик события для удаления позиции
+            modalWrapper2.remove();
+        });
+
+    });
+
+
+
+    const totalPrice = document.createElement('div');
+    totalPrice.classList.add('total-price');
+    totalPrice.innerText = `Total: €${totalCost.toFixed(2)}`;
+
+    modalContent.append(closeBtn, basketItemsList, totalPrice, proceedToPaymentBtn);
+    modalWrapper2.appendChild(modalContent);
+    document.body.appendChild(modalWrapper2);
+
+    closeBtn.addEventListener('click', () => {
+        modalWrapper2.remove();
+    });
+};
+
+basketArea.addEventListener('click', () => {
+    showBasketModal();
+});
+
+window.addEventListener('load', () => {
+    updateBasketCount();
+});
+
 
 
