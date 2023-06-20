@@ -23,6 +23,22 @@ const getCards = () => {
     });
 };
 
+const shuffleArray = (array) => {
+    const newArray = array.slice();
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+};
+const renderCards = (cardsData) => {
+    const shuffledCards = shuffleArray(cardsData);
+
+    shuffledCards.forEach((card) => {
+        createCards(card);
+    });
+};
+
 const createCards = ({ name, price, image, discount, id }) => {
     const cardItem = document.createElement('div');
     cardItem.classList.add('cards-item');
@@ -76,11 +92,6 @@ const createCards = ({ name, price, image, discount, id }) => {
     });
 };
 
-const renderCards = (cardsData) => {
-    cardsData.forEach((card) => {
-        createCards(card);
-    });
-};
 
 getCards()
     .then((cards) => {
@@ -157,7 +168,8 @@ const showQuickView = ({ name, price, image, discount }) => {
 
 const basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
 const addToBasket = ({ name, price, image, discount, id }) => {
-    const newItem = { name, price, image, discount, id };
+    const discountedPrice = calculateDiscountedPrice(price, discount);
+    const newItem = { name, price: discountedPrice, image, discount, id };
     basketItems.push(newItem);
     localStorage.setItem('basketItems', JSON.stringify(basketItems));
     updateBasketCount();
@@ -241,6 +253,9 @@ const showBasketModal = () => {
                     localStorage.setItem('basketItems', JSON.stringify(basketItems));
                     listItem.remove();
                     updateBasketCount();
+
+                    totalCost -= parseFloat(item.price);
+                    totalPrice.innerText = `Итого: ${totalCost.toFixed(2)} €`;
 
                     if (basketItems.length === 0) {
                         modalContent.innerHTML = '';
