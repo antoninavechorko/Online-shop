@@ -217,6 +217,7 @@ const showQuickView = ({ name, price, image, discount }) => {
 };
 
 const basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
+
 const addToBasket = ({ name, price, image, discount, id }) => {
     const discountedPrice = calculateDiscountedPrice(price, discount);
     const newItem = { name, price: discountedPrice, image, discount, id };
@@ -227,7 +228,9 @@ const addToBasket = ({ name, price, image, discount, id }) => {
 
 const updateBasketCount = () => {
     const countItems = document.getElementById('count-items');
-    countItems.innerText = basketItems.length;
+    const length = basketItems.length;
+
+    countItems.innerText = `${length}`;
 };
 
 const showNotification = (message) => {
@@ -302,7 +305,7 @@ const showBasketModal = () => {
                     basketItems.splice(itemIndex, 1);
                     localStorage.setItem('basketItems', JSON.stringify(basketItems));
                     listItem.remove();
-                    updateBasketCount();
+                    // updateBasketCount();
 
                     totalCost -= parseFloat(item.price);
                     totalPrice.innerText = `Итого: ${totalCost.toFixed(2)} €`;
@@ -317,6 +320,7 @@ const showBasketModal = () => {
                         modalContent.append(basketTitle, closeBtn, emptyBasketText);
                     }
                 }
+                updateBasketCount();
             });
 
             listItem.append(itemName, itemPrice, deleteButton);
@@ -343,7 +347,7 @@ const showBasketModal = () => {
     });
 
     proceedToPaymentBtn.addEventListener('click', () => {
-        console.log('Переход к странице оплаты');
+        alert('Переход к странице оплаты');
     });
 };
 
