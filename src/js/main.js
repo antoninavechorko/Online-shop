@@ -141,10 +141,10 @@ const showLoginModal = () => {
     loginForm.classList.add('login-form');
 
     const usernameInput = document.createElement('input');
-    usernameInput.setAttribute('type', 'text');
+    usernameInput.setAttribute('type', 'email');
     usernameInput.setAttribute('id', 'username');
     usernameInput.setAttribute('name', 'username');
-    usernameInput.setAttribute('placeholder', 'Enter your username');
+    usernameInput.setAttribute('placeholder', 'Enter your email');
     usernameInput.classList.add('login-input');
 
     const passwordInput = document.createElement('input');
