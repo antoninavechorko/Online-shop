@@ -15,7 +15,7 @@ searchInput.setAttribute('id', 'search');
 searchInput.setAttribute('placeholder', 'Search your product...');
 searchInput.classList.add('search_input');
 
-const accountArea = document.createElement('button');
+export const accountArea = document.createElement('button');
 accountArea.classList.add('account_area');
 const accountSvg = document.createElement('img');
 accountSvg.setAttribute('src', './style/assets/img/account.svg');
