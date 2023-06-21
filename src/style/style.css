@@ -177,7 +177,7 @@ body {
 }
 
 /* Modal styles */
-.modal-wrapper {
+.qv-modal-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -190,7 +190,7 @@ body {
     z-index: 9999;
 }
 
-.modal-content {
+.qv-modal-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -326,7 +326,7 @@ body {
 }
 
 /* ... Previous CSS code ... */
-.modal-wrapper3 {
+.login-modal-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -339,7 +339,7 @@ body {
     z-index: 9999;
 }
 
-.modal-content3 {
+.login-modal-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 4px;

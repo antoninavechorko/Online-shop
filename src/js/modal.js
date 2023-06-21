@@ -2,15 +2,15 @@ import {accountArea} from "./header.js";
 import {calculateDiscountedPrice} from './cards.js'
 
 const showLoginModal = () => {
-    const modalWrapper3 = document.createElement('div');
-    modalWrapper3.classList.add('modal-wrapper3');
+    const loginModalWrapper = document.createElement('div');
+    loginModalWrapper.classList.add('login-modal-wrapper');
 
-    const modalContent3 = document.createElement('div');
-    modalContent3.classList.add('modal-content3');
+    const loginModalContent = document.createElement('div');
+    loginModalContent.classList.add('login-modal-content');
 
-    const closeBtn = document.createElement('span');
-    closeBtn.classList.add('close-btn');
-    closeBtn.innerHTML = '&times;';
+    const loginCloseBtn = document.createElement('span');
+    loginCloseBtn.classList.add('close-btn');
+    loginCloseBtn.innerHTML = '&times;';
 
     const loginForm = document.createElement('form');
     loginForm.classList.add('login-form');
@@ -35,14 +35,12 @@ const showLoginModal = () => {
     loginButton.classList.add('login-button');
 
     loginForm.append(usernameInput, passwordInput, loginButton);
+    loginModalContent.append(loginCloseBtn, loginForm);
+    loginModalWrapper.append(loginModalContent);
+    document.body.append(loginModalWrapper);
 
-    modalContent3.append(closeBtn, loginForm);
-    modalWrapper3.appendChild(modalContent3);
-
-    document.body.appendChild(modalWrapper3);
-
-    closeBtn.addEventListener('click', () => {
-        modalWrapper3.remove();
+    loginCloseBtn.addEventListener('click', () => {
+        loginModalWrapper.remove();
     });
 };
 
@@ -51,15 +49,15 @@ accountArea.addEventListener('click', () => {
 });
 
 export const showQuickView = ({ name, price, image, discount }) => {
-    const modalWrapper = document.createElement('div');
-    modalWrapper.classList.add('modal-wrapper');
+    const quickViewModalWrapper = document.createElement('div');
+    quickViewModalWrapper.classList.add('qv-modal-wrapper');
 
-    const modalContent = document.createElement('div');
-    modalContent.classList.add('modal-content');
+    const quickViewModalContent = document.createElement('div');
+    quickViewModalContent.classList.add('qv-modal-content');
 
-    const closeBtn = document.createElement('span');
-    closeBtn.classList.add('close-btn');
-    closeBtn.innerHTML = '&times;';
+    const cardCloseBtn = document.createElement('span');
+    cardCloseBtn.classList.add('close-btn');
+    cardCloseBtn.innerHTML = '&times;';
 
     const cardImage = document.createElement('img');
     cardImage.classList.add('card-image');
@@ -81,13 +79,12 @@ export const showQuickView = ({ name, price, image, discount }) => {
     cardDiscount.innerText = `Discount: ${discount}%`;
 
     cardDetails.append(cardName, cardPrice, cardDiscount, cardDiscounted);
-    modalContent.append(closeBtn, cardImage, cardDetails);
-    modalWrapper.appendChild(modalContent);
+    quickViewModalContent.append(cardCloseBtn, cardImage, cardDetails);
+    quickViewModalWrapper.append(quickViewModalContent);
+    document.body.append(quickViewModalWrapper);
 
-    document.body.appendChild(modalWrapper);
-
-    closeBtn.addEventListener('click', () => {
-        modalWrapper.remove();
+    cardCloseBtn.addEventListener('click', () => {
+        quickViewModalWrapper.remove();
     });
 };
 
@@ -99,5 +96,5 @@ export const showNotification = (message) => {
 
     setTimeout(() => {
         notification.remove();
-    }, 2000);
+    }, 1500);
 };

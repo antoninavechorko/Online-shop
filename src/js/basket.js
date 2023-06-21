@@ -15,12 +15,16 @@ const updateBasketCount = () => {
     }
 };
 
+const updateLocalStorage = () => {
+    localStorage.setItem('basketItems', JSON.stringify(basketItems));
+    updateBasketCount();
+};
+
 export const addToBasket = ({ name, price, image, discount, id }) => {
     const discountedPrice = calculateDiscountedPrice(price, discount);
     const newItem = { name, price: discountedPrice, image, discount, id };
     basketItems.push(newItem);
-    localStorage.setItem('basketItems', JSON.stringify(basketItems));
-    updateBasketCount();
+    updateLocalStorage();
 };
 
 const showBasketModal = () => {
@@ -77,7 +81,7 @@ const showBasketModal = () => {
             const itemIndex = basketItems.findIndex((deleteItem) => deleteItem.id === item.id);
             if (itemIndex > -1) {
                 basketItems.splice(itemIndex, 1);
-                localStorage.setItem('basketItems', JSON.stringify(basketItems));
+                updateLocalStorage();
                 listItem.remove();
 
                 totalCost -= parseFloat(item.price);
@@ -87,8 +91,6 @@ const showBasketModal = () => {
             if (basketItems.length === 0) {
                 createEmptyBasketContent(basketModalContent, basketTitle, basketCloseBtn);
             }
-
-            updateBasketCount();
         });
     });
 
@@ -103,9 +105,8 @@ const showBasketModal = () => {
 
     basketClearBtn.addEventListener('click', () => {
         basketItems.length = 0;
-        localStorage.removeItem('basketItems');
-        updateBasketCount();
         createEmptyBasketContent(basketModalContent, basketTitle, basketCloseBtn);
+        updateLocalStorage();
     });
 
     proceedToPaymentBtn.addEventListener('click', () => {
