@@ -79,7 +79,7 @@ export const calculateDiscountedPrice = (price, discount) => {
 
 const shuffleArray = (array) => {
     const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
+    for (let i = 0; i < newArray.length; i++) {
         const randomIndex = Math.floor(Math.random() * (i + 1));
         [newArray[i], newArray[randomIndex]] = [newArray[randomIndex], newArray[i]];
     }
