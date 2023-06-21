@@ -40,7 +40,7 @@ const createCards = ({ name, price, image, discount, id }) => {
     quickViewBtn.innerText = 'Quick View';
 
     const addToBasketBtn = document.createElement('button');
-    addToBasketBtn.setAttribute('id', 'count_items');
+    addToBasketBtn.setAttribute('id', 'added-counter');
     const basketSvg = document.createElement('img');
     basketSvg.setAttribute('src', './style/assets/img/basket.svg');
 
@@ -78,10 +78,10 @@ export const calculateDiscountedPrice = (price, discount) => {
 };
 
 const shuffleArray = (array) => {
-    const newArray = array.slice();
+    const newArray = [...array];
     for (let i = newArray.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[randomIndex]] = [newArray[randomIndex], newArray[i]];
     }
     return newArray;
 };

@@ -3,14 +3,6 @@ import {calculateDiscountedPrice} from './cards.js'
 
 const basketItems = JSON.parse(localStorage.getItem('basketItems')) || [];
 
-export const addToBasket = ({ name, price, image, discount, id }) => {
-    const discountedPrice = calculateDiscountedPrice(price, discount);
-    const newItem = { name, price: discountedPrice, image, discount, id };
-    basketItems.push(newItem);
-    localStorage.setItem('basketItems', JSON.stringify(basketItems));
-    updateBasketCount();
-};
-
 const updateBasketCount = () => {
     const countItems = document.getElementById('count-items');
     const length = basketItems.length;
@@ -21,108 +13,99 @@ const updateBasketCount = () => {
     } else {
         countItems.style.display = 'inline-block';
     }
-
 };
-const showBasketModal = () => {
-    const modalWrapper2 = document.createElement('div');
-    modalWrapper2.classList.add('modal-wrapper');
 
-    const modalContent = document.createElement('div');
-    modalContent.classList.add('modal-content');
+export const addToBasket = ({ name, price, image, discount, id }) => {
+    const discountedPrice = calculateDiscountedPrice(price, discount);
+    const newItem = { name, price: discountedPrice, image, discount, id };
+    basketItems.push(newItem);
+    localStorage.setItem('basketItems', JSON.stringify(basketItems));
+    updateBasketCount();
+};
+
+const showBasketModal = () => {
+    const basketModalWrapper = document.createElement('div');
+    basketModalWrapper.classList.add('basket-modal-wrapper');
+
+    const basketModalContent = document.createElement('div');
+    basketModalContent.classList.add('basket-modal-content');
 
     const basketTitle = document.createElement('h2');
     basketTitle.innerText = 'Cart';
 
-    const closeBtn = document.createElement('span');
-    closeBtn.classList.add('close-btn');
-    closeBtn.innerHTML = '&times;';
-    closeBtn.addEventListener('click', () => {
-        modalWrapper2.remove();
-    });
+    const basketCloseBtn = document.createElement('span');
+    basketCloseBtn.classList.add('close-btn');
+    basketCloseBtn.innerHTML = '&times;';
 
-    const clearBasketBtn = document.createElement('button');
-    clearBasketBtn.innerText = 'Clear Cart';
+    const basketClearBtn = document.createElement('button');
+    basketClearBtn.innerText = 'Clear Cart';
 
-    clearBasketBtn.addEventListener('click', () => {
-        localStorage.removeItem('basketItems');
-        modalWrapper2.remove();
-        updateBasketCount();
-    });
-
-    const itemsList = document.createElement('ul');
-    itemsList.classList.add('basket-items-list');
-
-    let totalCost = 0;
+    const basketItemsList = document.createElement('ul');
+    basketItemsList.classList.add('basket-items-list');
 
     const proceedToPaymentBtn = document.createElement('button');
     proceedToPaymentBtn.innerText = 'Proceed to payment';
 
+    let totalCost = 0;
+
+    const totalPrice = document.createElement('div');
+    totalPrice.classList.add('total-price');
+
     if (basketItems.length === 0) {
-        const emptyBasketText = document.createElement('p');
-        emptyBasketText.innerText = 'Your cart is empty';
-        proceedToPaymentBtn.style.display = 'none';
-        clearBasketBtn.style.display = 'none';
-
-        modalContent.append(basketTitle, closeBtn, clearBasketBtn, emptyBasketText);
-    } else {
-        basketItems.forEach((item) => {
-            const listItem = document.createElement('li');
-            listItem.classList.add('basket-item');
-
-            const itemName = document.createElement('span');
-            itemName.innerText = item.name;
-
-            const itemPrice = document.createElement('span');
-            itemPrice.innerText = `${item.price} €`;
-
-            const deleteButton = document.createElement('button');
-            deleteButton.innerText = 'Delete';
-
-            deleteButton.addEventListener('click', () => {
-                const itemIndex = basketItems.findIndex((item) => item.id === item.id);
-                if (itemIndex > -1) {
-                    basketItems.splice(itemIndex, 1);
-                    localStorage.setItem('basketItems', JSON.stringify(basketItems));
-                    listItem.remove();
-                    // updateBasketCount();
-
-                    totalCost -= parseFloat(item.price);
-                    totalPrice.innerText = `Total Sum: ${totalCost.toFixed(2)} €`;
-
-                    if (basketItems.length === 0) {
-                        modalContent.innerHTML = '';
-                        const emptyBasketText = document.createElement('p');
-                        emptyBasketText.innerText = 'Your cart is empty';
-                        proceedToPaymentBtn.style.display = 'none';
-                        clearBasketBtn.style.display = 'none';
-
-                        modalContent.append(basketTitle, closeBtn, emptyBasketText);
-                    }
-                }
-                updateBasketCount();
-            });
-
-            listItem.append(itemName, itemPrice, deleteButton);
-            itemsList.append(listItem);
-
-            totalCost += parseFloat(item.price);
-        });
-
-        const totalPrice = document.createElement('div');
-        totalPrice.classList.add('total-price');
-        totalPrice.innerText = `Total Sum: ${totalCost.toFixed(2)} €`;
-
-        modalContent.append(basketTitle, closeBtn, clearBasketBtn, itemsList, totalPrice, proceedToPaymentBtn);
+        createEmptyBasketContent(basketModalContent, basketTitle, basketCloseBtn);
     }
 
-    modalWrapper2.appendChild(modalContent);
-    document.body.appendChild(modalWrapper2);
+    basketItems.forEach((item) => {
+        const listItem = document.createElement('li');
+        listItem.classList.add('basket-item');
 
-    clearBasketBtn.addEventListener('click', () => {
+        const itemName = document.createElement('span');
+        itemName.innerText = item.name;
+
+        const itemPrice = document.createElement('span');
+        itemPrice.innerText = `${item.price} €`;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.innerText = 'Delete';
+
+        listItem.append(itemName, itemPrice, deleteButton);
+        basketItemsList.append(listItem);
+
+        totalCost += parseFloat(item.price);
+
+        deleteButton.addEventListener('click', () => {
+            const itemIndex = basketItems.findIndex((deleteItem) => deleteItem.id === item.id);
+            if (itemIndex > -1) {
+                basketItems.splice(itemIndex, 1);
+                localStorage.setItem('basketItems', JSON.stringify(basketItems));
+                listItem.remove();
+
+                totalCost -= parseFloat(item.price);
+                totalPrice.innerText = `Total Sum: ${totalCost.toFixed(2)} €`;
+            }
+
+            if (basketItems.length === 0) {
+                createEmptyBasketContent(basketModalContent, basketTitle, basketCloseBtn);
+            }
+
+            updateBasketCount();
+        });
+    });
+
+    totalPrice.innerText = `Total Sum: ${totalCost.toFixed(2)} €`;
+    basketModalContent.append(basketTitle, basketCloseBtn, basketClearBtn, basketItemsList, totalPrice, proceedToPaymentBtn);
+    basketModalWrapper.append(basketModalContent);
+    document.body.append(basketModalWrapper);
+
+    basketCloseBtn.addEventListener('click', () => {
+        basketModalWrapper.remove();
+    });
+
+    basketClearBtn.addEventListener('click', () => {
         basketItems.length = 0;
         localStorage.removeItem('basketItems');
         updateBasketCount();
-        showBasketModal();
+        createEmptyBasketContent(basketModalContent, basketTitle, basketCloseBtn);
     });
 
     proceedToPaymentBtn.addEventListener('click', () => {
@@ -130,10 +113,18 @@ const showBasketModal = () => {
     });
 };
 
+const createEmptyBasketContent = (basketModalContent, basketTitle, basketCloseBtn) => {
+    basketModalContent.innerHTML = '';
+
+    const emptyBasketText = document.createElement('p');
+    emptyBasketText.innerText = 'Your cart is empty';
+    basketModalContent.append(basketTitle, emptyBasketText, basketCloseBtn);
+};
+
 basketArea.addEventListener('click', () => {
     showBasketModal();
-});
+})
 
 window.addEventListener('load', () => {
     updateBasketCount();
-});
+})

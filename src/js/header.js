@@ -28,7 +28,6 @@ basketSpan.setAttribute('id','count-items');
 const basketSvg = document.createElement('img');
 basketSvg.setAttribute('src', './style/assets/img/basket.svg');
 
-
 searchArea.append(searchInputSvg, searchInput);
 accountArea.append(accountSvg);
 basketArea.append(basketSvg, basketSpan);
