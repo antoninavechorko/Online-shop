@@ -18,45 +18,55 @@ const footerData = [
                 text: 'Collaboration',
                 link: '#',
             },
+            {
+                text: 'Career',
+                link: '#',
+            },
         ]
     },
     {
-        title: 'FAQ',
+        title: 'To Customers',
         items: [
             {
                 text: 'How to place order',
                 link: '#',
             },
             {
-                text: 'Payment methods',
+                text: 'Delivery terms',
                 link: '#',
             },
             {
-                text: 'Terms of delivery',
+                text: 'Product returns',
                 link: '#',
             },
         ]
     },
     {
-        title: 'Social Media',
+        title: 'For Partners',
         items: [
             {
-                imageSrc: './style/assets/img/instagram.svg',
-                imageAlt: 'Instagram',
-                link: 'https://www.instagram.com/'
+                text: 'Franchise',
+                link: '#',
             },
             {
-                imageSrc: './style/assets/img/facebook.svg',
-                imageAlt: 'Facebook',
-                link: 'https://www.facebook.com/'
+                text: 'To Couriers',
+                link: '#',
             },
             {
-                imageSrc: './style/assets/img/twitter.svg',
-                imageAlt: 'Twitter',
-                link: 'https://twitter.com/'
-            }
+                text: 'Partner Pickup Point',
+                link: '#',
+            },
         ]
-    }
+    },
+    {
+        title: 'Download our app',
+        items: [
+            {
+                image: './style/img/qr-code.png',
+                link: '#',
+            },
+        ],
+    },
 ];
 
 footerData.forEach(list => {
@@ -68,17 +78,19 @@ footerData.forEach(list => {
     listContainer.append(listTitle);
 
     const ul = document.createElement('ul');
+
     list.items.forEach(item => {
         const li = document.createElement('li');
+        li.classList.add('footer-li');
 
         const link = document.createElement('a');
         link.setAttribute('href', item.link);
 
-        if (item.imageSrc) {
-            const image = document.createElement('img');
-            image.setAttribute('src', item.imageSrc);
-            image.setAttribute('alt', item.imageAlt);
-            link.append(image);
+        const qrImg = document.createElement('img');
+        qrImg.src = item.image;
+
+        if (item.image) {
+            link.append(qrImg);
         }
 
         if (item.text) {
