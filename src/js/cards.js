@@ -41,8 +41,19 @@ const createCards = ({ name, price, image, discount, id }) => {
 
     const addToBasketBtn = document.createElement('button');
     addToBasketBtn.setAttribute('id', 'added-counter');
-    const basketSvg = document.createElement('img');
-    basketSvg.setAttribute('src', './style/assets/img/basket.svg');
+
+    const svgCardBasket = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    const pathCardBasket = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    svgCardBasket.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svgCardBasket.setAttribute("width", "16");
+    svgCardBasket.setAttribute("height", "16");
+    svgCardBasket.setAttribute("fill", "currentColor");
+    svgCardBasket.setAttribute("class", "bi bi-basket3");
+    svgCardBasket.setAttribute("viewBox", "0 0 16 16");
+    pathCardBasket.setAttribute("d", "M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM3.394 15l-1.48-6h-.97l1.525 6.426a.75.75 0 0 0 .729.574h9.606a.75.75 0 0 0 .73-.574L15.056 9h-.972l-1.479 6h-9.21z");
+
+    svgCardBasket.append(pathCardBasket);
+    addToBasketBtn.append(svgCardBasket);
 
     const cardDetailsArea = document.createElement('div');
     cardDetailsArea.classList.add('cardDetailsArea');
@@ -56,7 +67,6 @@ const createCards = ({ name, price, image, discount, id }) => {
     const cardProductName = document.createElement('h4');
     cardProductName.innerText = name;
 
-    addToBasketBtn.append(basketSvg);
     cardImageArea.append(cardImage, discountSpan, quickViewBtn, addToBasketBtn);
     cardDetailsArea.append(priceDiscounted, priceNormal, cardProductName);
     cardItem.append(cardImageArea, cardDetailsArea);
