@@ -106,7 +106,8 @@ footerData.forEach(list => {
 });
 
 const copyRight = document.createElement('div');
-const copyRightText = document.createTextNode('© MyShop by Antonina Vechorko');
+const copyRightText = document.createTextNode('© Shop-Berry by Antonina Vechorko');
+copyRight.classList.add('copyright');
 
 
 copyRight.append(copyRightText);

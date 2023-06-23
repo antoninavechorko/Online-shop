@@ -35,6 +35,7 @@ const createCards = ({ name, price, image, discount, id }) => {
 
     const discountSpan = document.createElement('span');
     discountSpan.innerText = `${discount}%`;
+    discountSpan.classList.add('discount_span');
 
     const quickViewBtn = document.createElement('button');
     quickViewBtn.innerText = 'Quick View';
@@ -99,7 +100,7 @@ const shuffleArray = (array) => {
 const renderCards = (cardsData) => {
     const shuffledCards = shuffleArray(cardsData);
 
-    shuffledCards.forEach((card) => {
-        createCards(card);
-    });
+    for (let i = 0; i < 15; i++) {
+        createCards(shuffledCards[i]);
+    }
 };

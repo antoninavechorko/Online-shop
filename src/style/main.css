@@ -5,7 +5,6 @@
     font-family: 'roboto', sans-serif;
     font-size: 16px;
     font-weight: 400;
-    border-radius: 0.3em;
     scroll-behavior: smooth;
 }
 
@@ -55,26 +54,30 @@ body {
 }
 
 .title {
-    font-size: 28px;
-    font-weight: 600;
-    padding: 20px;
+    font-size: 32px;
+    font-weight: 900;
+    padding: 35px 0 15px 68px;
+    color: #289d72;
 }
 
 .cards {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 68px 0 68px;
+    gap: 1rem;
+    margin: 10px 0 40px 0;
 }
 
-/*//card*/
 .cards-item {
     display: flex;
     flex-direction: column;
-    width: 250px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    width: 240px;
+    border: 1px solid #ececf3;
+    box-shadow: 0 1px 3px rgba(238, 238, 238, 0.7);
     padding: 10px;
-    margin: 10px;
+    border-radius: 0.3em;
 }
 
 .cardImageArea {
@@ -83,18 +86,22 @@ body {
 
 .card-image {
     width: 100%;
-    height: auto;
+    height: 210px;
     object-fit: cover;
 }
 
-.discount-span {
+.discount_span {
     position: absolute;
     top: 10px;
     left: 10px;
-    background-color: #ff0000;
+    background-color: #289d72;
+    box-shadow: 0 0 2px rgba(49, 196, 141, 0.2);
     color: #fff;
     padding: 5px;
-    border-radius: 3px;
+    border-radius: 0.3em;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
 }
 
 .quick-view-btn {
