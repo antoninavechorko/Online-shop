@@ -1,0 +1,28 @@
+.footer_area img {
+    width: 100px;
+    height: 80px;
+    padding-left: 30px;
+}
+
+#footer {
+    border: 1px green solid;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-list li{
+    list-style-type: none;
+}
+
+.footer_area {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+a:active,
+a:hover,
+a {
+    text-decoration: none;
+    color: black;
+}
