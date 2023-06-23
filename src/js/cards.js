@@ -39,9 +39,11 @@ const createCards = ({ name, price, image, discount, id }) => {
 
     const quickViewBtn = document.createElement('button');
     quickViewBtn.innerText = 'Quick View';
+    quickViewBtn.classList.add('qv-btn');
 
     const addToBasketBtn = document.createElement('button');
     addToBasketBtn.setAttribute('id', 'added-counter');
+    addToBasketBtn.classList.add('add-to-basket-btn')
 
     const svgCardBasket = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     const pathCardBasket = document.createElementNS("http://www.w3.org/2000/svg", "path");

@@ -35,9 +35,9 @@
 .account_area, .basket_area {
     width: 40px;
     height: 40px;
-    background: #31C48D;
+    background: #289d72;
     color: white;
-    box-shadow: 0 0 2px rgba(49, 196, 141, 0.2);
+    box-shadow: 0 0 2px rgba(40, 157, 114, 0.2);
     border: none;
     cursor: pointer;
     transition: 0.2s ease-out;
@@ -45,5 +45,5 @@
 }
 
 .account_area:hover, .basket_area:hover {
-    background: #289d72;
+    background: #228361;
 }
