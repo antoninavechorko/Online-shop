@@ -3,6 +3,13 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background-color: #ffffff;
 }
 
 .logo {
@@ -44,6 +51,15 @@
     border-radius: 0.3em;
 }
 
+.basket_area span{
+    margin-left: 2px;
+}
+
 .account_area:hover, .basket_area:hover {
     background: #228361;
+}
+
+#count-items {
+    font-size: 12px;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
 }

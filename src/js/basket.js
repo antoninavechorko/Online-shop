@@ -55,6 +55,11 @@ const showBasketModal = () => {
     const totalPrice = document.createElement('div');
     totalPrice.classList.add('total-price');
 
+    totalPrice.innerText = `Total Sum: ${totalCost.toFixed(2)} €`;
+    basketModalContent.append(basketTitle, basketCloseBtn, basketClearBtn, basketItemsList, totalPrice, proceedToPaymentBtn);
+    basketModalWrapper.append(basketModalContent);
+    document.body.append(basketModalWrapper);
+
     if (basketItems.length === 0) {
         createEmptyBasketContent(basketModalContent, basketTitle, basketCloseBtn);
     }
@@ -94,10 +99,6 @@ const showBasketModal = () => {
         });
     });
 
-    totalPrice.innerText = `Total Sum: ${totalCost.toFixed(2)} €`;
-    basketModalContent.append(basketTitle, basketCloseBtn, basketClearBtn, basketItemsList, totalPrice, proceedToPaymentBtn);
-    basketModalWrapper.append(basketModalContent);
-    document.body.append(basketModalWrapper);
 
     basketCloseBtn.addEventListener('click', () => {
         basketModalWrapper.remove();

@@ -61,17 +61,24 @@ const createCards = ({ name, price, image, discount, id }) => {
     const cardDetailsArea = document.createElement('div');
     cardDetailsArea.classList.add('cardDetailsArea');
 
+    const priceWrapper = document.createElement('div');
+    priceWrapper.classList.add('price-wrapper');
+
     const priceDiscounted = document.createElement('span');
     priceDiscounted.innerText = calculateDiscountedPrice(price, discount) + '€';
+    priceDiscounted.classList.add('price-discounted');
 
     const priceNormal = document.createElement('span');
     priceNormal.innerText = `${price} €`;
+    priceNormal.classList.add('price-normal');
 
     const cardProductName = document.createElement('h4');
     cardProductName.innerText = name;
+    cardProductName.classList.add('card-title')
 
     cardImageArea.append(cardImage, discountSpan, quickViewBtn, addToBasketBtn);
-    cardDetailsArea.append(priceDiscounted, priceNormal, cardProductName);
+    priceWrapper.append(priceDiscounted, priceNormal)
+    cardDetailsArea.append(priceWrapper, cardProductName);
     cardItem.append(cardImageArea, cardDetailsArea);
     cardsBlock.append(cardItem);
 
@@ -102,7 +109,7 @@ const shuffleArray = (array) => {
 const renderCards = (cardsData) => {
     const shuffledCards = shuffleArray(cardsData);
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 10; i++) {
         createCards(shuffledCards[i]);
     }
 };

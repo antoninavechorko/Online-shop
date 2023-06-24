@@ -56,27 +56,30 @@ export const showQuickView = ({ name, price, image, discount }) => {
     quickViewModalContent.classList.add('qv-modal-content');
 
     const cardCloseBtn = document.createElement('span');
-    cardCloseBtn.classList.add('close-btn');
+    cardCloseBtn.classList.add('qv-close-btn');
     cardCloseBtn.innerHTML = '&times;';
 
     const cardImage = document.createElement('img');
-    cardImage.classList.add('card-image');
+    cardImage.classList.add('qv-card-image');
     cardImage.setAttribute('src', image);
 
     const cardDetails = document.createElement('div');
-    cardDetails.classList.add('card-details');
+    cardDetails.classList.add('qv-card-details');
 
     const cardName = document.createElement('h2');
     cardName.innerText = name;
 
     const cardDiscounted = document.createElement('span');
     cardDiscounted.innerText = `Price with discount: ${calculateDiscountedPrice(price, discount)}€`;
+    cardDiscounted.classList.add('qv-discounted-price');
 
     const cardPrice = document.createElement('span');
     cardPrice.innerText = `Price: ${price} €`;
+    cardPrice.classList.add('qv-price');
 
     const cardDiscount = document.createElement('span');
     cardDiscount.innerText = `Discount: ${discount}%`;
+    cardDiscount.classList.add('qv-discount');
 
     cardDetails.append(cardName, cardPrice, cardDiscount, cardDiscounted);
     quickViewModalContent.append(cardCloseBtn, cardImage, cardDetails);
@@ -96,5 +99,5 @@ export const showNotification = (message) => {
 
     setTimeout(() => {
         notification.remove();
-    }, 1500);
+    }, 1000);
 };

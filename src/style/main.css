@@ -112,7 +112,7 @@ body {
 
 .add-to-basket-btn {
     position: absolute;
-    bottom: 20px;
+    bottom: 15px;
     right: 10px;
     width: 35px;
     height: 35px;
@@ -127,7 +127,7 @@ body {
 }
 
 .add-to-basket-btn:hover {
-    background: #228361;
+    background-color: #228361;
 }
 
 .qv-btn {
@@ -141,6 +141,12 @@ body {
     padding: 5px 10px;
     border-radius: 0.3em;
     cursor: pointer;
+    transition: 0.2s ease-out;
+}
+
+.qv-btn:hover {
+    background-color: #228361;
+    border: 2px solid #228361;
 }
 
 .basket-svg {
@@ -149,34 +155,34 @@ body {
     margin-right: 5px;
 }
 
-.count-items {
-    font-size: 12px;
+.cardDetailsArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5em;
+    margin-top: 6px;
 }
 
-.cardDetailsArea {
-    margin-top: 10px;
+.price-wrapper {
+    display: flex;
+    justify-content: space-between;
 }
 
 .price-discounted {
-    font-size: 18px;
     font-weight: bold;
-    color: #ff0000;
+    color: #289d72;
+    text-shadow: 0 0 1px rgba(49, 196, 141, 0.2);
 }
 
 .price-normal {
-    font-size: 14px;
-    color: #888;
+    color: #8c8b8b;
     text-decoration: line-through;
-}
-
-.card-product-name {
-    margin-top: 10px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.card-product-description {
-    margin-top: 5px;
     font-size: 14px;
 }
+
+.card-title {
+    font-weight: bold;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
 
