@@ -37,15 +37,22 @@ const showBasketModal = () => {
     const basketTitle = document.createElement('h2');
     basketTitle.innerText = 'Cart';
 
+    const basketClearBtn = document.createElement('button');
+    basketClearBtn.classList.add('clear-basket-btn')
+    basketClearBtn.innerText = 'Clear Cart';
+
     const basketCloseBtn = document.createElement('span');
     basketCloseBtn.classList.add('close-btn');
     basketCloseBtn.innerHTML = '&times;';
 
-    const basketClearBtn = document.createElement('button');
-    basketClearBtn.innerText = 'Clear Cart';
+    const basketListWrapper = document.createElement('div');
+    basketListWrapper.classList.add('basket-list-wrapper');
 
     const basketItemsList = document.createElement('ul');
     basketItemsList.classList.add('basket-items-list');
+
+    const basketFooterWrapper = document.createElement('div');
+    basketFooterWrapper.classList.add('basket-footer-wrapper');
 
     const proceedToPaymentBtn = document.createElement('button');
     proceedToPaymentBtn.innerText = 'Proceed to payment';
@@ -56,7 +63,9 @@ const showBasketModal = () => {
     totalPrice.classList.add('total-price');
 
     totalPrice.innerText = `Total Sum: ${totalCost.toFixed(2)} €`;
-    basketModalContent.append(basketTitle, basketCloseBtn, basketClearBtn, basketItemsList, totalPrice, proceedToPaymentBtn);
+    basketListWrapper.append(basketItemsList, basketClearBtn);
+    basketFooterWrapper.append(totalPrice, proceedToPaymentBtn);
+    basketModalContent.append(basketTitle, basketCloseBtn, basketListWrapper, basketFooterWrapper);
     basketModalWrapper.append(basketModalContent);
     document.body.append(basketModalWrapper);
 
@@ -68,10 +77,12 @@ const showBasketModal = () => {
         const listItem = document.createElement('li');
         listItem.classList.add('basket-item');
 
-        const itemName = document.createElement('span');
+        const itemName = document.createElement('div');
+        itemName.classList.add('basket-item-name');
         itemName.innerText = item.name;
 
-        const itemPrice = document.createElement('span');
+        const itemPrice = document.createElement('div');
+        itemPrice.classList.add('basket-item-price');
         itemPrice.innerText = `${item.price} €`;
 
         const deleteButton = document.createElement('button');
@@ -81,6 +92,7 @@ const showBasketModal = () => {
         basketItemsList.append(listItem);
 
         totalCost += parseFloat(item.price);
+        totalPrice.innerText = `Total Sum: ${totalCost.toFixed(2)} €`;
 
         deleteButton.addEventListener('click', () => {
             const itemIndex = basketItems.findIndex((deleteItem) => deleteItem.id === item.id);
@@ -119,6 +131,7 @@ const createEmptyBasketContent = (basketModalContent, basketTitle, basketCloseBt
     basketModalContent.innerHTML = '';
 
     const emptyBasketText = document.createElement('p');
+    emptyBasketText.classList.add('empty-basket-text');
     emptyBasketText.innerText = 'Your cart is empty';
     basketModalContent.append(basketTitle, emptyBasketText, basketCloseBtn);
 };

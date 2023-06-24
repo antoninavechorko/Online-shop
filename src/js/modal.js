@@ -9,7 +9,7 @@ const showLoginModal = () => {
     loginModalContent.classList.add('login-modal-content');
 
     const loginCloseBtn = document.createElement('span');
-    loginCloseBtn.classList.add('close-btn');
+    loginCloseBtn.classList.add('login-close-btn');
     loginCloseBtn.innerHTML = '&times;';
 
     const loginForm = document.createElement('form');

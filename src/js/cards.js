@@ -109,7 +109,7 @@ const shuffleArray = (array) => {
 const renderCards = (cardsData) => {
     const shuffledCards = shuffleArray(cardsData);
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 15; i++) {
         createCards(shuffledCards[i]);
     }
 };
