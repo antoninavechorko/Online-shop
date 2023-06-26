@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    scroll-behavior: smooth;
+}
+
+body {
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    min-height: 415px;
+}
+
+
+.swiper {
+    width: 100%;
+    height: 500px;
+}
+
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    color: #31C48D;
+}
+
+.swiper-pagination-bullet {
+    background-color: #31C48D;
+    width: 10px;
+    height: 10px;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 900;
+    padding: 35px 0 15px 68px;
+    color: #289d72;
+    text-shadow: 0 0 1px rgba(40, 157, 114, 0.2);
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: stretch;
+    padding: 0 68px 0 68px;
+    gap: 1rem;
+    margin: 10px 0 40px 0;
+}
+
+.cards-item {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    max-height: 287px;
+    border: 1px solid #ececf3;
+    box-shadow: 0 1px 3px rgba(238, 238, 238, 0.7);
+    padding: 10px;
+    border-radius: 0.3em;
+    position: relative;
+}
+
+.cardImageArea {
+    position: relative;
+}
+
+.card-image {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    filter: brightness(70%);
+}
+
+.discount_span {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    min-width: 35px;
+    background-color: #289d72;
+    box-shadow: 0 0 2px rgba(49, 196, 141, 0.2);
+    color: #ffffff;
+    padding: 5px;
+    text-align: center;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
+    border-radius: 0.3em;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.add-to-basket-btn {
+    position: absolute;
+    bottom: 13px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    align-items: center;
+    background: #289d72;
+    box-shadow: 0 0 2px rgba(49, 196, 141, 0.2);
+    border: none;
+    border-radius: 0.3em;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s ease-out;
+}
+
+.add-to-basket-btn:hover {
+    background-color: #228361;
+}
+
+.qv-btn {
+    position: absolute;
+    top: 90px;
+    left: 60px;
+    background-color: transparent;
+    color: #ffffff;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
+    border: 2px solid #289d72;
+    padding: 5px 10px;
+    border-radius: 0.3em;
+    cursor: pointer;
+    transition: 0.2s ease-out;
+}
+
+.qv-btn:hover {
+    background-color: #228361;
+    border: 2px solid #228361;
+}
+
+.basket-svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.cardDetailsArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5em;
+    margin-top: 6px;
+}
+
+.price-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-discounted {
+    font-weight: bold;
+    color: #289d72;
+    text-shadow: 0 0 1px rgba(49, 196, 141, 0.2);
+}
+
+.price-normal {
+    color: #8c8b8b;
+    text-decoration: line-through;
+    font-size: 14px;
+}
+
+.card-title {
+    font-weight: bold;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+}

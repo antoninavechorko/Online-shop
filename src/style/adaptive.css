@@ -1,0 +1,114 @@
+@media (max-width: 901px) {
+    .cards {
+        justify-content: center;
+    }
+
+    .title {
+        text-align: center;
+    }
+}
+
+@media (max-width: 680px) {
+    #header {
+        padding: 0 15px 0 15px;
+    }
+
+    .search_area {
+        flex-basis: 40%;
+    }
+
+    .logo {
+        width: 160px;
+        height: 80px;
+    }
+
+    .title {
+        padding: 35px 0 15px 0;
+    }
+
+    .footer_area {
+        gap: 5px;
+        padding: 0 5px 0 5px;
+    }
+
+    .swiper {
+        display: none;
+    }
+}
+
+@media (max-width: 510px) {
+    .search_area {
+        flex-basis: 40%;
+    }
+
+    .logo {
+        width: 140px;
+        height: 80px;
+    }
+
+    .account_area, .basket_area {
+        width: 35px;
+        height: 35px;
+    }
+
+    .search_input {
+        font-size: 14px;
+    }
+
+    .footer-li a, .footer_area h4 {
+        font-size: 12px;
+    }
+
+    .footer_area img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .basket-modal-content {
+        top: 0;
+        right: 0;
+    }
+}
+
+@media (max-width: 420px) {
+    #header {
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        width: 180px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+
+    .search_area {
+        flex-basis: 60%;
+    }
+
+    .qv-card-details h2 {
+        font-size: 14px;
+    }
+
+    .qv-price, .qv-discount, .qv-discounted-price {
+        font-size: 12px;
+    }
+
+    .basket-modal-content {
+        top: 0;
+        right: 0;
+        width: 100%;
+    }
+
+    .notification {
+        font-size: 12px;
+    }
+
+    .footer-list li{
+        margin-bottom: 6px;
+    }
+
+    #header {
+        padding: 0 0 15px 0;
+    }
+}
+

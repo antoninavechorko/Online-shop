@@ -59,9 +59,9 @@ export const showQuickView = ({ name, price, image, discount }) => {
     cardCloseBtn.classList.add('qv-close-btn');
     cardCloseBtn.innerHTML = '&times;';
 
-    const cardImage = document.createElement('assets');
+    const cardImage = document.createElement('img');
     cardImage.classList.add('qv-card-image');
-    cardImage.setAttribute('src', image);
+    cardImage.src = image;
 
     const cardDetails = document.createElement('div');
     cardDetails.classList.add('qv-card-details');
