@@ -1,7 +1,5 @@
 const header = document.getElementById('header');
 
-const logo = document.getElementsByClassName('logo');
-
 const searchArea = document.createElement('div');
 searchArea.classList.add('search_area');
 

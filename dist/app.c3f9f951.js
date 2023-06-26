@@ -125,7 +125,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.searchInput = exports.basketArea = exports.accountArea = void 0;
 var header = document.getElementById('header');
-var logo = document.getElementsByClassName('logo');
 var searchArea = document.createElement('div');
 searchArea.classList.add('search_area');
 var searchInput = document.createElement('input');
@@ -227,7 +226,7 @@ var showQuickView = function showQuickView(_ref) {
   var cardCloseBtn = document.createElement('span');
   cardCloseBtn.classList.add('qv-close-btn');
   cardCloseBtn.innerHTML = '&times;';
-  var cardImage = document.createElement('img');
+  var cardImage = document.createElement('assets');
   cardImage.classList.add('qv-card-image');
   cardImage.setAttribute('src', image);
   var cardDetails = document.createElement('div');
@@ -304,7 +303,7 @@ var addToBasket = function addToBasket(_ref) {
   updateLocalStorage();
 };
 exports.addToBasket = addToBasket;
-var showBasketModal = function showBasketModal() {
+var renderBasketModal = function renderBasketModal() {
   var basketModalWrapper = document.createElement('div');
   basketModalWrapper.classList.add('basket-modal-wrapper');
   var basketModalContent = document.createElement('div');
@@ -388,7 +387,7 @@ var createEmptyBasketContent = function createEmptyBasketContent(basketModalCont
   basketModalContent.append(basketTitle, emptyBasketText, basketCloseBtn);
 };
 _header.basketArea.addEventListener('click', function () {
-  showBasketModal();
+  renderBasketModal();
 });
 window.addEventListener('load', function () {
   updateBasketCount();
@@ -437,7 +436,7 @@ var createCards = function createCards(_ref) {
   cardItem.setAttribute('id', id);
   var cardImageArea = document.createElement('div');
   cardImageArea.classList.add('cardImageArea');
-  var cardImage = document.createElement('img');
+  var cardImage = document.createElement('assets');
   cardImage.classList.add('card-image');
   cardImage.setAttribute('src', image);
   var discountSpan = document.createElement('span');
@@ -589,7 +588,7 @@ var footerData = [{
 }, {
   title: 'Download our app',
   items: [{
-    image: './style/img/qr-code.png',
+    image: './style/assets/qr-code.png',
     link: '#'
   }]
 }];
@@ -605,7 +604,7 @@ footerData.forEach(function (list) {
     li.classList.add('footer-li');
     var link = document.createElement('a');
     link.setAttribute('href', item.link);
-    var qrImg = document.createElement('img');
+    var qrImg = document.createElement('assets');
     qrImg.src = item.image;
     if (item.image) {
       link.append(qrImg);
@@ -658,7 +657,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55561" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58921" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -62,7 +62,7 @@ const footerData = [
         title: 'Download our app',
         items: [
             {
-                image: './style/img/qr-code.png',
+                image: './assets/qr-code.png',
                 link: '#',
             },
         ],
@@ -86,10 +86,12 @@ footerData.forEach(list => {
         const link = document.createElement('a');
         link.setAttribute('href', item.link);
 
-        const qrImg = document.createElement('img');
+        const qrImg = document.createElement('assets');
         qrImg.src = item.image;
 
         if (item.image) {
+            const qrImg = document.createElement('img');
+            qrImg.src = item.image;
             link.append(qrImg);
         }
 

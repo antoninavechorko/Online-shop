@@ -27,7 +27,7 @@ export const addToBasket = ({ name, price, image, discount, id }) => {
     updateLocalStorage();
 };
 
-const showBasketModal = () => {
+const renderBasketModal = () => {
     const basketModalWrapper = document.createElement('div');
     basketModalWrapper.classList.add('basket-modal-wrapper');
 
@@ -137,7 +137,7 @@ const createEmptyBasketContent = (basketModalContent, basketTitle, basketCloseBt
 };
 
 basketArea.addEventListener('click', () => {
-    showBasketModal();
+    renderBasketModal();
 })
 
 window.addEventListener('load', () => {

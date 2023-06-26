@@ -29,7 +29,7 @@ const createCards = ({ name, price, image, discount, id }) => {
     const cardImageArea = document.createElement('div');
     cardImageArea.classList.add('cardImageArea');
 
-    const cardImage = document.createElement('img');
+    const cardImage = document.createElement('assets');
     cardImage.classList.add('card-image');
     cardImage.setAttribute('src', image);
 
