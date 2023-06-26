@@ -144,10 +144,12 @@ body {
     display: flex;
     flex-direction: column;
     width: 240px;
+    max-height: 287px;
     border: 1px solid #ececf3;
     box-shadow: 0 1px 3px rgba(238, 238, 238, 0.7);
     padding: 10px;
     border-radius: 0.3em;
+    position: relative;
 }
 
 .cardImageArea {
@@ -181,7 +183,7 @@ body {
 
 .add-to-basket-btn {
     position: absolute;
-    bottom: 15px;
+    bottom: 12px;
     right: 10px;
     width: 35px;
     height: 35px;
