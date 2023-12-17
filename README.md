@@ -1,4 +1,5 @@
 # Online-shop
 
-start project
-npm run dev
+<b>start project</b>: npm run dev
+<b>stack</b>: plain JS
+
